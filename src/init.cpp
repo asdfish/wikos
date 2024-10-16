@@ -1,4 +1,3 @@
-#include <flags.hpp>
 #include <files.hpp>
 #include <init.hpp>
 #include <utils.hpp>
@@ -34,30 +33,30 @@ int init(void) {
     }
   }
 
-  if(std::filesystem::exists("./.bikos.jsonc")) {
-    std::cout << "./bikos.jsonc already exists. Overide? (y): ";
+  if(std::filesystem::exists("./.wikos.jsonc")) {
+    std::cout << "./wikos.jsonc already exists. Overide? (y): ";
     std::string confirmation;
     std::cin >> confirmation;
 
     std::error_code error;
     error.clear();
 
-    if(std::filesystem::is_regular_file("./.bikos.jsonc"))
-      std::filesystem::remove("./.bikos.jsonc", error);
+    if(std::filesystem::is_regular_file("./.wikos.jsonc"))
+      std::filesystem::remove("./.wikos.jsonc", error);
     else
-      std::filesystem::remove_all("./.bikos.jsonc", error);
+      std::filesystem::remove_all("./.wikos.jsonc", error);
 
     if(error.value() != 0) {
-      std::cout << "Failed to remove ./.bikos.jsonc\n";
+      std::cout << "Failed to remove ./.wikos.jsonc\n";
       return -1;
     }
   }
 
-  std::ofstream bikos_jsonc("./.bikos.jsonc");
-  if(!bikos_jsonc.good()) {
-    std::cout << "Failed to open ./.bikos.jsonc for writing\n";
+  std::ofstream wikos_jsonc("./.wikos.jsonc");
+  if(!wikos_jsonc.good()) {
+    std::cout << "Failed to open ./.wikos.jsonc for writing\n";
     return -1;
   }
-  bikos_jsonc.close();
+  wikos_jsonc.close();
   return 0;
 }

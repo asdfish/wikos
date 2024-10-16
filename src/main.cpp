@@ -3,14 +3,6 @@
 /*#include <init.hpp>*/
 /*#include <run.hpp>*/
 
-#include <iostream>
-
-#include <flags.hpp>
-
-int main() {
-  return 0;
-}
-
 /*int main(int argc, const char* argv[]) {*/
 /*  if(argc == 1) {*/
 /*    help(true);*/
@@ -36,3 +28,10 @@ int main() {
 /**/
 /*  return result;*/
 /*}*/
+
+/*#include <ftxui/component/component.hpp>*/
+#include <ftxui/component/screen_interactive.hpp>
+
+int main() {
+  ftxui::ScreenInteractive screen = ftxui::ScreenInteractive::Fullscreen();
+}
