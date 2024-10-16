@@ -7,7 +7,7 @@ LINK_FLAGS := -Ldeps/ftxui/build -lftxui-component -lftxui-dom -lftxui-screen
 DEBUG_FLAGS := -Wall -Wextra -Wpedantic
 OPTIMIZATION_FLAGS := -O2 -march=native -pipe
 
-OBJECT_FILES := build/config.cpp.o build/files.cpp.o build/flags.cpp.o build/help.cpp.o build/init.cpp.o build/main.cpp.o build/run.cpp.o build/utils.cpp.o
+OBJECT_FILES := build/config.cpp.o build/files.cpp.o build/flags.cpp.o build/help.cpp.o build/init.cpp.o build/main.cpp.o build/run.cpp.o
 
 define COMPILE
 	${CXX} -c $(1) ${CXX_STANDARD} ${INCLUDE_FLAGS} ${DEBUG_FLAGS} -o build/$(notdir $(1)).o
@@ -50,9 +50,6 @@ build/main.cpp.o: src/main.cpp
 
 build/run.cpp.o: src/run.cpp
 	$(call COMPILE,src/run.cpp)
-
-build/utils.cpp.o: src/utils.cpp
-	$(call COMPILE,src/utils.cpp)
 
 bikos: ${OBJECT_FILES}
 	${CXX} ${OBJECT_FILES} ${LINK_FLAGS} -o bikos
