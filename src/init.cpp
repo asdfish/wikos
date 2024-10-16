@@ -58,41 +58,6 @@ int init(void) {
     std::cout << "Failed to open ./.bikos.jsonc for writing\n";
     return -1;
   }
-  bikos_jsonc <<     "{\n"
-                     "\t\"files\": [\n";
-  for(unsigned int i = 0; i < source_files.size(); i ++) {
-    bikos_jsonc <<   "\t\t\"" << source_files[i] << "\"";
-    if (i != source_files.size() - 1) [[unlikely]]
-      bikos_jsonc << ",";
-    bikos_jsonc <<   '\n';
-  }
-  bikos_jsonc <<     "\t],\n"
-                     "\t\"checks\": [\n";
-  for(unsigned int i = 0; i < check_names.size(); i ++) {
-    bikos_jsonc <<   "\t\tfalse";
-    if(i != check_names.size() - 1)
-      bikos_jsonc << ",";
-    bikos_jsonc <<   '\n';
-  }
-  bikos_jsonc <<     "\t],\n"
-                     "\t\"numeric_abstract_domain\": 0,\n"
-                     "\t\"entry_points\": [],\n"
-                     "\t\"jobs\": 1,\n"
-                     "\t\"optimization\": 1,\n"
-                     "\t\"intra_procedural\": false,\n"
-                     "\t\"widening_strategy\": 0,\n"
-                     "\t\"narrowing_strategy\": 3,\n"
-                     "\t\"widening_delays\": [],\n"
-                     "\t\"partitioning\": 0,\n"
-                     "\t\"miscellaneous\": [\n";
-  for(unsigned int i = 0; i < miscellaneous.size(); i ++) {
-    bikos_jsonc <<   "\t\tfalse";
-    if(i != miscellaneous.size() - 1)
-      bikos_jsonc << ",";
-    bikos_jsonc <<   "\n";
-  }
-  bikos_jsonc <<     "\t]\n"
-                     "}\n";
   bikos_jsonc.close();
   return 0;
 }

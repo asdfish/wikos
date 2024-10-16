@@ -10,7 +10,7 @@ OPTIMIZATION_FLAGS := -O2 -march=native -pipe
 OBJECT_FILES := build/config.cpp.o build/files.cpp.o build/flags.cpp.o build/help.cpp.o build/init.cpp.o build/main.cpp.o build/run.cpp.o
 
 define COMPILE
-	${CXX} -c $(1) ${CXX_STANDARD} ${INCLUDE_FLAGS} ${DEBUG_FLAGS} -o build/$(notdir $(1)).o
+	${CXX} -c $(1) ${CXX_STANDARD} ${INCLUDE_FLAGS} ${DEBUG_FLAGS} ${OPTIMIZATION_FLAGS} -o build/$(notdir $(1)).o
 
 endef
 
@@ -60,7 +60,7 @@ ifneq (,$(wildcard build))
 	rm -r build
 endif
 ifneq (,$(wildcard deps))
-	rm -r deps
+	rm -rf deps
 endif
 ifneq (,$(wildcard bikos))
 	rm bikos
