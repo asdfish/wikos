@@ -76,14 +76,15 @@ extern const std::vector<std::string> optimization_values = {
   "aggressive",
 };
 
+// --
 const std::vector<std::string> miscellaneous = {
-  "--globals-init",
-  "--no-init-globals",
-  "--no-liveness",
-  "--no-pointer",
-  "--no-widening-hints",
-  "--no-fixpoint-cache",
-  "--no-checks",
-  "--argc",
-  "--no-libc",
+  "globals-init",
+  "no-init-globals",
+  "no-liveness",
+  "no-pointer",
+  "no-widening-hints",
+  "no-fixpoint-cache",
+  "no-checks",
+  "argc",
+  "no-libc",
 };

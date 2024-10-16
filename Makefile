@@ -1,5 +1,5 @@
 CXX ?= c++
-CXX_STANDARD := -std=c++17
+CXX_STANDARD := -std=c++20
 
 INCLUDE_FLAGS := -Iinclude -Ideps/ftxui/include
 LINK_FLAGS := -Ldeps/ftxui/build -lftxui-component -lftxui-dom -lftxui-screen
@@ -30,25 +30,25 @@ endif
 	cmake -S deps/ftxui -B deps/ftxui/build
 	$(MAKE) -C deps/ftxui/build
 
-build/config.cpp.o: src/config.cpp
+build/config.cpp.o: include/config.hpp src/config.cpp
 	$(call COMPILE,src/config.cpp)
 
-build/files.cpp.o: src/files.cpp
+build/files.cpp.o: include/files.hpp src/files.cpp
 	$(call COMPILE,src/files.cpp)
 
-build/flags.cpp.o: src/flags.cpp
+build/flags.cpp.o: include/flags.hpp src/flags.cpp
 	$(call COMPILE,src/flags.cpp)
 
-build/help.cpp.o: src/help.cpp
+build/help.cpp.o: include/help.hpp src/help.cpp
 	$(call COMPILE,src/help.cpp)
 
-build/init.cpp.o: src/init.cpp
+build/init.cpp.o: include/init.hpp include/utils.hpp src/init.cpp
 	$(call COMPILE,src/init.cpp)
 
 build/main.cpp.o: src/main.cpp
 	$(call COMPILE,src/main.cpp)
 
-build/run.cpp.o: src/run.cpp
+build/run.cpp.o: include/run.hpp src/run.cpp
 	$(call COMPILE,src/run.cpp)
 
 bikos: ${OBJECT_FILES}
