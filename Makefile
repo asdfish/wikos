@@ -1,8 +1,8 @@
 CXX ?= c++
 CXX_STANDARD := -std=c++20
 
-INCLUDE_FLAGS := -Iinclude -Ideps/ftxui/include
-LINK_FLAGS := -Ldeps/ftxui/build -lftxui-component -lftxui-dom -lftxui-screen
+INCLUDE_FLAGS := -Iinclude -Ideps/ftxui/include -Ideps/jsoncpp/include
+LINK_FLAGS := -Ldeps/ftxui/build -lftxui-component -lftxui-dom -lftxui-screen -Ldeps/jsoncpp/build/lib -ljsoncpp
 
 DEBUG_FLAGS := -Wall -Wextra -Wpedantic
 OPTIMIZATION_FLAGS := -O2 -march=native -pipe
@@ -14,7 +14,7 @@ define COMPILE
 
 endef
 
-all: build deps/ftxui bikos
+all: build deps deps/ftxui deps/jsoncpp wikos
 
 build:
 	mkdir build
@@ -22,13 +22,17 @@ build:
 deps:
 	mkdir deps
 
-deps/ftxui: deps
-	git -C deps clone https://github.com/ArthurSonzogni/ftxui --depth=1
-ifneq (,$(wildcard deps/ftxui/build))
+deps/ftxui:
+	git -C deps clone https://github.com/ArthurSonzogni/ftxui --depth=1 --branch=v5.0.0
 	mkdir deps/ftxui/build
-endif
 	cmake -S deps/ftxui -B deps/ftxui/build
 	$(MAKE) -C deps/ftxui/build
+
+deps/jsoncpp:
+	git -C deps clone https://github.com/open-source-parsers/jsoncpp --depth=1 --branch=1.9.6
+	mkdir deps/jsoncpp/build
+	cmake -S deps/jsoncpp -B deps/jsoncpp/build -DJSONCPP_WITH_TESTS=OFF -DBUILD_SHARED_LIBS=OFF
+	$(MAKE) -C deps/jsoncpp/build
 
 build/config.cpp.o: include/config.hpp src/config.cpp
 	$(call COMPILE,src/config.cpp)
@@ -51,9 +55,9 @@ build/main.cpp.o: src/main.cpp
 build/run.cpp.o: include/run.hpp src/run.cpp
 	$(call COMPILE,src/run.cpp)
 
-bikos: ${OBJECT_FILES}
-	${CXX} ${OBJECT_FILES} ${LINK_FLAGS} -o bikos
-	strip bikos
+wikos: ${OBJECT_FILES}
+	${CXX} ${OBJECT_FILES} ${LINK_FLAGS} -o wikos
+	strip wikos
 
 clean:
 ifneq (,$(wildcard build))
@@ -62,6 +66,6 @@ endif
 ifneq (,$(wildcard deps))
 	rm -rf deps
 endif
-ifneq (,$(wildcard bikos))
-	rm bikos
+ifneq (,$(wildcard wikos))
+	rm wikos
 endif
