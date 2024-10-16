@@ -14,6 +14,4 @@
 std::vector<std::string> directory_files(const std::string& directory_path)
   DIRECTORY_FUNCTION(directory_entry.is_regular_file())
 std::vector<std::string> directory_directories(const std::string& directory_path)
-  DIRECTORY_FUNCTION(directory_entry.is_directory() &&
-                     directory_entry.path() != "." &&
-                     directory_entry.path() != "..")
+  DIRECTORY_FUNCTION(directory_entry.is_directory())
