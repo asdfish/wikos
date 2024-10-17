@@ -1,5 +1,5 @@
 #include <config.hpp>
-#include <flags.hpp>
+#include <flag_definitions.hpp>
 
 #include <ftxui/component/component.hpp>
 #include <ftxui/component/component_options.hpp>
@@ -14,7 +14,7 @@
 #include <vector>
 
 int config(void) {
-  flags_init();
+  flags_define();
 
   Json::Value root;
   {

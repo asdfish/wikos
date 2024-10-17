@@ -1,4 +1,4 @@
-#include <flags.hpp>
+#include <flag_definitions.hpp>
 
 const std::vector<std::string> checks = {
   "buffer overflow analysis",
@@ -86,7 +86,7 @@ const std::vector<std::string> others = {
 
 std::vector<std::unique_ptr<Flag>> flags;
 
-void flags_init(void) {
+void flags_define(void) {
   flags.push_back(std::make_unique<CheckboxFlag>("-a=", "checks", checks));
   flags.push_back(std::make_unique<RadioboxFlag>("-d=", "mumerical_abstract_domains", mumerical_abstract_domains));
   flags.push_back(std::make_unique<RadioboxFlag>("--opt=", "optimization_levels", optimization_levels));
@@ -97,8 +97,8 @@ void flags_init(void) {
   flags.push_back(std::make_unique<CheckboxFlag>("--", "others", others));
 }
 
-void flags_init_default(void) {
-  flags_init();
+void flags_define_default(void) {
+  flags_define();
   for(unsigned int i = 0; i < flags.size(); i ++)
     flags[i]->set_default();
 }

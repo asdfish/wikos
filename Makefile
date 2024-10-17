@@ -7,17 +7,29 @@ LINK_FLAGS := -Ldeps/ftxui/build -lftxui-component -lftxui-dom -lftxui-screen -L
 DEBUG_FLAGS := -Wall -Wextra -Wpedantic -Wno-missing-field-initializers
 OPTIMIZATION_FLAGS := -O2 -march=native -pipe
 
-OBJECT_FILES := build/classes.cpp.o build/config.cpp.o build/flags.cpp.o build/files.cpp.o build/help.cpp.o build/init.cpp.o build/main.cpp.o build/run.cpp.o
+OBJECT_FILES := build/commands/config.cpp.o build/commands/help.cpp.o build/commands/init.cpp.o build/commands/run.cpp.o $\
+								build/flags/classes.cpp.o $\
+								build/utils/files.cpp.o build/utils/flag_definitions.cpp.o $\
+								build/main.cpp.o
 
 define COMPILE
-	${CXX} -c $(1) ${CXX_STANDARD} ${INCLUDE_FLAGS} ${DEBUG_FLAGS} ${OPTIMIZATION_FLAGS} -o build/$(notdir $(1)).o
+	${CXX} -c $(1) ${CXX_STANDARD} ${INCLUDE_FLAGS} ${DEBUG_FLAGS} ${OPTIMIZATION_FLAGS} -o $(2)
 
 endef
 
-all: build deps deps/ftxui deps/jsoncpp wikos
+all: build build/commands build/flags build/utils deps deps/ftxui deps/jsoncpp wikos
 
 build:
 	mkdir build
+
+build/commands:
+	mkdir build/commands
+
+build/flags:
+	mkdir build/flags
+
+build/utils:
+	mkdir build/utils
 
 deps:
 	mkdir deps
@@ -34,29 +46,25 @@ deps/jsoncpp:
 	cmake -S deps/jsoncpp -B deps/jsoncpp/build -DJSONCPP_WITH_TESTS=OFF -DBUILD_SHARED_LIBS=OFF -DBUILD_OBJECT_LIBS=OFF
 	$(MAKE) -C deps/jsoncpp/build
 
-build/classes.cpp.o: include/classes.hpp src/classes.cpp
-	$(call COMPILE,src/classes.cpp)
+build/commands/config.cpp.o: src/commands/config.cpp
+	$(call COMPILE,src/commands/config.cpp,build/commands/config.cpp.o)
+build/commands/help.cpp.o: src/commands/help.cpp
+	$(call COMPILE,src/commands/help.cpp,build/commands/help.cpp.o)
+build/commands/init.cpp.o: src/commands/init.cpp
+	$(call COMPILE,src/commands/init.cpp,build/commands/init.cpp.o)
+build/commands/run.cpp.o: src/commands/run.cpp
+	$(call COMPILE,src/commands/run.cpp,build/commands/run.cpp.o)
 
-build/config.cpp.o: include/config.hpp include/flags.hpp src/config.cpp
-	$(call COMPILE,src/config.cpp)
+build/flags/classes.cpp.o: src/flags/classes.cpp
+	$(call COMPILE,src/flags/classes.cpp,build/flags/classes.cpp.o)
 
-build/flags.cpp.o: include/flags.hpp src/flags.cpp
-	$(call COMPILE,src/flags.cpp)
-
-build/files.cpp.o: include/files.hpp src/files.cpp
-	$(call COMPILE,src/files.cpp)
-
-build/help.cpp.o: include/help.hpp src/help.cpp
-	$(call COMPILE,src/help.cpp)
-
-build/init.cpp.o: include/init.hpp include/utils.hpp src/init.cpp
-	$(call COMPILE,src/init.cpp)
+build/utils/files.cpp.o: src/utils/files.cpp
+	$(call COMPILE,src/utils/files.cpp,build/utils/files.cpp.o)
+build/utils/flag_definitions.cpp.o: src/utils/flag_definitions.cpp
+	$(call COMPILE,src/utils/flag_definitions.cpp,build/utils/flag_definitions.cpp.o)
 
 build/main.cpp.o: src/main.cpp
-	$(call COMPILE,src/main.cpp)
-
-build/run.cpp.o: include/run.hpp src/run.cpp
-	$(call COMPILE,src/run.cpp)
+	$(call COMPILE,src/main.cpp,build/main.cpp.o)
 
 wikos: ${OBJECT_FILES}
 	${CXX} ${OBJECT_FILES} ${LINK_FLAGS} -o wikos

@@ -68,7 +68,7 @@ void InputFlag::add_to_json(Json::Value& root) {
   Json::Value array;
   for(unsigned int i = 0, j = 0; i < items.size(); i ++)
     if(items[i].length() != 0) {
-      array[j] = items[i]:
+      array[j] = items[i];
       j ++;
     }
 

@@ -1,4 +1,4 @@
-#include <flags.hpp>
+#include <flag_definitions.hpp>
 #include <files.hpp>
 #include <init.hpp>
 #include <utils.hpp>
@@ -61,7 +61,7 @@ int init(void) {
     return -1;
   }
 
-  flags_init_default();
+  flags_define_default();
 
   Json::Value root;
   for(unsigned int i = 0; i < flags.size(); i ++)

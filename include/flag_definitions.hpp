@@ -1,5 +1,5 @@
-#ifndef FLAGS_HPP
-#define FLAGS_HPP
+#ifndef FLAG_DEFINITIONS_HPP
+#define FLAG_DEFINITIONS_HPP
 
 #include <classes.hpp>
 
@@ -18,7 +18,7 @@ extern const std::vector<std::string> others;
 
 extern std::vector<std::unique_ptr<Flag>> flags;
 
-extern void flags_init(void);
-extern void flags_init_default(void);
+extern void flags_define(void);
+extern void flags_define_default(void);
 
 #endif
