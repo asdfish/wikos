@@ -66,7 +66,7 @@ build/flags/input_flag.cpp.o: include/flags/input_flag.hpp src/flags/input_flag.
 build/flags/radiobox_flag.cpp.o: include/flags/radiobox_flag.hpp src/flags/radiobox_flag.cpp
 	$(call COMPILE,src/flags/radiobox_flag.cpp,build/flags/radiobox_flag.cpp.o)
 
-build/utils/files.cpp.o: include/utils/files.hpp src/utils/files.cpp
+build/utils/files.cpp.o: include/utils/files.hpp include/utils/vectors.hpp src/utils/files.cpp
 	$(call COMPILE,src/utils/files.cpp,build/utils/files.cpp.o)
 build/utils/flag_definitions.cpp.o: include/flags/checkbox_array_flag.hpp include/flags/checkbox_separated_flag.hpp include/flags/radiobox_flag.hpp src/utils/flag_definitions.cpp
 	$(call COMPILE,src/utils/flag_definitions.cpp,build/utils/flag_definitions.cpp.o)
