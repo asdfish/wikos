@@ -12,6 +12,8 @@ OBJECT_FILES := build/commands/config.cpp.o build/commands/help.cpp.o build/comm
 								build/utils/files.cpp.o build/utils/flag_definitions.cpp.o $\
 								build/main.cpp.o
 
+INSTALL_DIRECTORY := /usr/local/bin
+
 define COMPILE
 	${CXX} -c $(1) ${CXX_STANDARD} ${INCLUDE_FLAGS} ${DEBUG_FLAGS} ${OPTIMIZATION_FLAGS} -o $(2)
 
@@ -89,4 +91,12 @@ ifneq (,$(wildcard deps))
 endif
 ifneq (,$(wildcard wikos))
 	rm wikos
+endif
+
+install: all ${INSTALL_DIRECTORY}
+	cp wikos ${INSTALL_DIRECTORY}
+
+uninstall:
+ifneq (, $(wildcard ${INSTALL_DIRECTORY}/wikos))
+	rm ${INSTALL_DIRECTORY}/wikos
 endif
