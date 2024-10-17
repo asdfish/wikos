@@ -3,23 +3,23 @@
 #include <utils/flag_definitions.hpp>
 
 const std::vector<std::string> checks = {
-  "buffer overflow analysis",
-  "division by zero analysis",
-  "null pointer analysis",
-  "assertion prover",
-  "unaligned pointer analysis",
-  "uninitialized variable analysis",
-  "signed integer overflow analysis",
-  "unsigned integer overflow analysis",
-  "shift count analysis",
-  "pointer overflow analysis",
-  "pointer comparison analysis",
-  "soundness analysis",
-  "function call analysis",
-  "dead code analysis",
-  "double free analysis",
-  "debugger",
-  "memory watcher",
+  "boa",
+  "dbz",
+  "nullity",
+  "prover",
+  "upa",
+  "uva",
+  "sio",
+  "uio",
+  "shc",
+  "poa",
+  "pcmp",
+  "sound",
+  "fca",
+  "dca",
+  "dfa",
+  "dbg",
+  "watch",
 };
 
 const std::vector<std::string> mumerical_abstract_domains = {
@@ -94,7 +94,7 @@ void flags_define(void) {
   flags.push_back(std::make_unique<RadioboxFlag>("--opt=", "optimization_levels", optimization_levels));
   flags.push_back(std::make_unique<RadioboxFlag>("--proc=", "procedural_analysis", procedural_analysis));
   flags.push_back(std::make_unique<RadioboxFlag>("--widening-strategy=", "widening_strategies", widening_strategies));
-  flags.push_back(std::make_unique<RadioboxFlag>("--narrowing-strategy", "narrowing_strategies", narrowing_strategies));
+  flags.push_back(std::make_unique<RadioboxFlag>("--narrowing-strategy=", "narrowing_strategies", narrowing_strategies));
   flags.push_back(std::make_unique<RadioboxFlag>("--partitioning=", "partitioning_type", partitioning_type));
   /*flags.push_back(std::make_unique<CheckboxFlag>("--", "others", others));*/
 }

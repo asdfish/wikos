@@ -1,10 +1,18 @@
 #include <flags/checkbox_array_flag.hpp>
 
 std::string CheckboxArrayFlag::as_string() {
-  std::string output = header + "=\'";
+  std::vector<std::string> selected;
   for(unsigned int i = 0; i < items.size(); i ++) {
-    output += items[i];
-    if(i != items.size() - 1)
+    if(!*selections[i])
+      continue;
+
+    selected.push_back(items[i]);
+  }
+
+  std::string output = header + "\'";
+  for(unsigned int i = 0; i < selected.size(); i ++) {
+    output += selected[i];
+    if(i != selected.size() - 1)
       output += ",";
   }
   output += "\'";
