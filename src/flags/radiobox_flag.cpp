@@ -20,10 +20,7 @@ void RadioboxFlag::add_to_tab(ftxui::Component tab) {
 }
 
 bool RadioboxFlag::check_json(Json::Value& root) {
-  if(!root[name].isConvertibleTo(Json::ValueType::uintValue))
-    return false;
-
-  if(root[name].asUInt() >= items.size())
+  if(!root[name].isConvertibleTo(Json::ValueType::uintValue) || root[name].asUInt() >= items.size())
     return false;
 
   return true;
