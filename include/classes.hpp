@@ -37,12 +37,26 @@ class CheckboxFlag : public Flag {
     void set_from_json(Json::Value&) override;
 };
 
+class InputFlag : public Flag {
+  public:
+    int selection = 0;
+
+    InputFlag(const std::string& header, const std::string& name, const std::vector<std::string>& items);
+
+    void add_to_json(Json::Value&) override;
+    void add_to_tab(ftxui::Component tab) override;
+    bool check_json(Json::Value&) override;
+    void set_default() override;
+    void set_from_json(Json::Value&) override;
+  private:
+    void add_input(ftxui::Component tab);
+};
+
 class RadioboxFlag : public Flag {
   public:
     int selection = 0;
 
     RadioboxFlag(const std::string& header, const std::string& name, const std::vector<std::string>& items);
-    ~RadioboxFlag() override;
 
     void add_to_json(Json::Value&) override;
     void add_to_tab(ftxui::Component tab) override;
