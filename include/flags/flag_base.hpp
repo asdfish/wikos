@@ -12,16 +12,15 @@ class FlagBase {
   public:
     std::string header;
     std::string name;
-    std::vector<std::string> items;
 
     virtual void add_to_json(Json::Value&) = 0;
-    virtual void add_to_tab(ftxui::Component tab) = 0;
-    virtual std::string as_string() = 0;
+    virtual void add_to_tab(ftxui::Component) = 0;
+    virtual std::string as_string(void) = 0;
     virtual bool check_json(Json::Value&) = 0;
-    virtual void set_default() = 0;
+    virtual void set_default(void) = 0;
     virtual void set_from_json(Json::Value&) = 0;
 
-    virtual ~FlagBase() {}
+    virtual ~FlagBase(void) {}
 };
 
 #endif

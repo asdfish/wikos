@@ -1,6 +1,6 @@
 #include <flags/checkbox_array_flag.hpp>
 
-std::string CheckboxArrayFlag::as_string() {
+std::string CheckboxArrayFlag::as_string(void) {
   std::vector<std::string> selected;
   for(unsigned int i = 0; i < items.size(); i ++)
     if(*selections[i])

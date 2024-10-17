@@ -19,7 +19,7 @@ void RadioboxFlag::add_to_tab(ftxui::Component tab) {
   tab->Add(container);
 }
 
-std::string RadioboxFlag::as_string() {
+std::string RadioboxFlag::as_string(void) {
   return header + items[selection];
 }
 
@@ -30,7 +30,7 @@ bool RadioboxFlag::check_json(Json::Value& root) {
   return true;
 }
 
-void RadioboxFlag::set_default() {
+void RadioboxFlag::set_default(void) {
   selection = 0;
 }
 

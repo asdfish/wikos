@@ -11,7 +11,7 @@ CheckboxBase::CheckboxBase(const std::string& header, const std::string& name, c
   for(unsigned int i = 0; i < items.size(); i ++)
     selections.push_back(new bool);
 }
-CheckboxBase::~CheckboxBase() {
+CheckboxBase::~CheckboxBase(void) {
   for(unsigned int i = 0; i < selections.size(); i ++)
     delete selections.at(i);
 }
@@ -43,7 +43,7 @@ bool CheckboxBase::check_json(Json::Value& root) {
   return true;
 }
 
-void CheckboxBase::set_default() {
+void CheckboxBase::set_default(void) {
   for(unsigned int i = 0; i < items.size(); i ++)
     *selections[i] = false;
 }

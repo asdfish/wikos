@@ -1,4 +1,4 @@
-#ifndef CHECKBOX_SEPARATED_HPP
+#ifndef CHECKBOX_SEPARATED_FLAG_HPP
 #define CHECKBOX_SEPARATED_FLAG_HPP
 
 #include <flags/checkbox_base.hpp>

@@ -5,6 +5,7 @@
 
 class CheckboxBase : public FlagBase {
   public:
+    std::vector<std::string> items;
     std::vector<bool*> selections;
 
     CheckboxBase(const std::string& header, const std::string& name, const std::vector<std::string>& items);

@@ -1,4 +1,4 @@
-CXX ?= c++
+CXX := clang++
 CXX_STANDARD := -std=c++20
 
 INCLUDE_FLAGS := -Iinclude -Ideps/ftxui/include -Ideps/jsoncpp/include

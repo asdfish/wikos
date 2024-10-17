@@ -6,7 +6,7 @@
 class CheckboxArrayFlag : public CheckboxBase {
   public:
     using CheckboxBase::CheckboxBase;
-    std::string as_string() override;
+    std::string as_string(void) override;
 };
 
 #endif

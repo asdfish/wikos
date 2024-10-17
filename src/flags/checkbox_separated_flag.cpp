@@ -1,6 +1,6 @@
 #include <flags/checkbox_separated_flag.hpp>
 
-std::string CheckboxSeparatedFlag::as_string() {
+std::string CheckboxSeparatedFlag::as_string(void) {
   std::vector<std::string> selected;
   for(unsigned int i = 0; i < items.size(); i ++)
     if(*selections[i])
