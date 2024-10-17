@@ -1,7 +1,7 @@
 #ifndef FLAG_DEFINITIONS_HPP
 #define FLAG_DEFINITIONS_HPP
 
-#include <classes.hpp>
+#include <flags/classes.hpp>
 
 #include <memory>
 #include <string>

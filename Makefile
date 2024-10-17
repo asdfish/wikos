@@ -46,24 +46,24 @@ deps/jsoncpp:
 	cmake -S deps/jsoncpp -B deps/jsoncpp/build -DJSONCPP_WITH_TESTS=OFF -DBUILD_SHARED_LIBS=OFF -DBUILD_OBJECT_LIBS=OFF
 	$(MAKE) -C deps/jsoncpp/build
 
-build/commands/config.cpp.o: src/commands/config.cpp
+build/commands/config.cpp.o: include/commands/config.hpp include/utils/flag_definitions.hpp src/commands/config.cpp
 	$(call COMPILE,src/commands/config.cpp,build/commands/config.cpp.o)
 build/commands/help.cpp.o: src/commands/help.cpp
 	$(call COMPILE,src/commands/help.cpp,build/commands/help.cpp.o)
-build/commands/init.cpp.o: src/commands/init.cpp
+build/commands/init.cpp.o: include/commands/init.hpp include/utils/flag_definitions.hpp include/utils/files.hpp include/utils/vectors.hpp src/commands/init.cpp
 	$(call COMPILE,src/commands/init.cpp,build/commands/init.cpp.o)
 build/commands/run.cpp.o: src/commands/run.cpp
 	$(call COMPILE,src/commands/run.cpp,build/commands/run.cpp.o)
 
-build/flags/classes.cpp.o: src/flags/classes.cpp
+build/flags/classes.cpp.o: include/flags/classes.hpp src/flags/classes.cpp
 	$(call COMPILE,src/flags/classes.cpp,build/flags/classes.cpp.o)
 
-build/utils/files.cpp.o: src/utils/files.cpp
+build/utils/files.cpp.o: include/utils/files.hpp src/utils/files.cpp
 	$(call COMPILE,src/utils/files.cpp,build/utils/files.cpp.o)
-build/utils/flag_definitions.cpp.o: src/utils/flag_definitions.cpp
+build/utils/flag_definitions.cpp.o: include/utils/flag_definitions.hpp src/utils/flag_definitions.cpp
 	$(call COMPILE,src/utils/flag_definitions.cpp,build/utils/flag_definitions.cpp.o)
 
-build/main.cpp.o: src/main.cpp
+build/main.cpp.o: include/commands/config.hpp include/commands/help.hpp include/commands/init.hpp include/commands/run.hpp src/main.cpp
 	$(call COMPILE,src/main.cpp,build/main.cpp.o)
 
 wikos: ${OBJECT_FILES}

@@ -1,7 +1,7 @@
-#include <flag_definitions.hpp>
-#include <files.hpp>
-#include <init.hpp>
-#include <utils.hpp>
+#include <commands/init.hpp>
+#include <utils/flag_definitions.hpp>
+#include <utils/files.hpp>
+#include <utils/vectors.hpp>
 
 #include <json/json.h>
 

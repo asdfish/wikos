@@ -1,4 +1,4 @@
-#include <classes.hpp>
+#include <flags/classes.hpp>
 
 #include <ftxui/component/component_options.hpp>
 

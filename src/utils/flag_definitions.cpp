@@ -1,4 +1,4 @@
-#include <flag_definitions.hpp>
+#include <utils/flag_definitions.hpp>
 
 const std::vector<std::string> checks = {
   "buffer overflow analysis",

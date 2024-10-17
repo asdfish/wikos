@@ -1,5 +1,5 @@
-#include <config.hpp>
-#include <flag_definitions.hpp>
+#include <commands/config.hpp>
+#include <utils/flag_definitions.hpp>
 
 #include <ftxui/component/component.hpp>
 #include <ftxui/component/component_options.hpp>

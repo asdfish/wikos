@@ -1,7 +1,7 @@
-#include <config.hpp>
-#include <help.hpp>
-#include <init.hpp>
-#include <run.hpp>
+#include <commands/config.hpp>
+#include <commands/help.hpp>
+#include <commands/init.hpp>
+#include <commands/run.hpp>
 
 #include <iostream>
 
