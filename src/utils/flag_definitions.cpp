@@ -2,6 +2,7 @@
 #include <flags/checkbox_separated_flag.hpp>
 #include <flags/input_flag.hpp>
 #include <flags/radiobox_flag.hpp>
+#include <flags/source_files_flag.hpp>
 #include <utils/flag_definitions.hpp>
 
 const std::vector<std::string> checks = {
@@ -91,6 +92,7 @@ const std::vector<std::string> others = {
 std::vector<std::unique_ptr<FlagBase>> flags;
 
 void flags_define(void) {
+  flags.push_back(std::make_unique<SourceFilesFlag>("files"));
   flags.push_back(std::make_unique<CheckboxArrayFlag>("-a=", "checks", checks));
   flags.push_back(std::make_unique<RadioboxFlag>("-d=", "mumerical_abstract_domains", mumerical_abstract_domains));
   flags.push_back(std::make_unique<RadioboxFlag>("--opt=", "optimization_levels", optimization_levels));

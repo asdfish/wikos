@@ -75,7 +75,7 @@ int config(void) {
 
   ftxui::Component container = ftxui::Container::Horizontal({
     menu,
-    tabs | ftxui::flex,
+    tabs,
     buttons,
   });
 
@@ -83,7 +83,7 @@ int config(void) {
     return ftxui::hbox({
       menu->Render(),
       ftxui::separator(),
-      tabs->Render(),
+      tabs->Render() | ftxui::flex | ftxui::yframe,
       ftxui::separator(),
       buttons->Render(),
     }) | ftxui::border;

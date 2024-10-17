@@ -78,7 +78,7 @@ void SourceFilesFlag::set_from_json(Json::Value& root) {
   }
 
   for(unsigned int i = 0; i < root[name].size(); i ++) {
-    file_paths.push_back(root[name]["path"].asString());
-    file_selections.push_back(new bool(root[name]["selected"].asBool()));
+    file_paths.push_back(root[name][i]["path"].asString());
+    file_selections.push_back(new bool(root[name][i]["selected"].asBool()));
   }
 }

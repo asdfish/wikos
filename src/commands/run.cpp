@@ -3,6 +3,7 @@
 
 #include <json/json.h>
 
+#include <cstdlib>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -35,9 +36,14 @@ int run(void) {
     flags[i]->set_from_json(root);
 
   std::stringstream command;
+  command << "ikos ";
   for(unsigned int i = 0; i < flags.size(); i ++)
     command << flags[i]->as_string() << ' ';
 
-  std::cout << command.str();
+  if(std::system(command.str().c_str()) == -1) {
+    std::cerr << "Failed to execute " << command.str() << "\n";
+    return -1;
+  }
+
   return 0;
 }

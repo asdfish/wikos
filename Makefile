@@ -70,7 +70,7 @@ build/flags/source_files_flag.cpp.o: include/flags/source_files_flag.hpp include
 
 build/utils/files.cpp.o: include/utils/files.hpp include/utils/vectors.hpp src/utils/files.cpp
 	$(call COMPILE,src/utils/files.cpp,build/utils/files.cpp.o)
-build/utils/flag_definitions.cpp.o: include/flags/checkbox_array_flag.hpp include/flags/checkbox_separated_flag.hpp include/flags/radiobox_flag.hpp src/utils/flag_definitions.cpp
+build/utils/flag_definitions.cpp.o: include/flags/checkbox_array_flag.hpp include/flags/checkbox_separated_flag.hpp include/flags/radiobox_flag.hpp include/flags/source_files_flag.hpp src/utils/flag_definitions.cpp
 	$(call COMPILE,src/utils/flag_definitions.cpp,build/utils/flag_definitions.cpp.o)
 
 build/main.cpp.o: include/commands/config.hpp include/commands/help.hpp include/commands/init.hpp include/commands/run.hpp src/main.cpp
