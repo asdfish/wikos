@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+#include <ftxui/component/component.hpp>
 #include <json/json.h>
 
 class Flag {
@@ -11,19 +12,23 @@ class Flag {
     std::string name;
     std::vector<std::string> items;
 
-    /*virtual void add_to_container(void) = 0;*/
+    virtual void add_to_tab(ftxui::Component tab) = 0;
     virtual bool check_syntax(Json::Value&) = 0;
     virtual void into_json(Json::Value&) = 0;
+
+    virtual ~Flag() {}
 };
 
 class CheckboxFlag : public Flag {
   public:
-    std::vector<bool> selections;
+    std::vector<bool*> selections;
 
     CheckboxFlag(const std::string& name, const std::vector<std::string>& items);
+    ~CheckboxFlag() override;
 
-    bool check_syntax(Json::Value&);
-    void into_json(Json::Value&);
+    void add_to_tab(ftxui::Component tab) override;
+    bool check_syntax(Json::Value&) override;
+    void into_json(Json::Value&) override;
 };
 
 class DropdownFlag : public Flag {
@@ -32,8 +37,8 @@ class DropdownFlag : public Flag {
 
     DropdownFlag(const std::string& name, const std::vector<std::string>& items);
 
-    bool check_syntax(Json::Value&);
-    void into_json(Json::Value&);
+    bool check_syntax(Json::Value&) override;
+    void into_json(Json::Value&) override;
 };
 
 #endif

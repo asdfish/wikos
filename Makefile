@@ -7,7 +7,7 @@ LINK_FLAGS := -Ldeps/ftxui/build -lftxui-component -lftxui-dom -lftxui-screen -L
 DEBUG_FLAGS := -Wall -Wextra -Wpedantic
 OPTIMIZATION_FLAGS := -O2 -march=native -pipe
 
-OBJECT_FILES := build/config.cpp.o build/files.cpp.o build/classes.cpp.o build/help.cpp.o build/init.cpp.o build/main.cpp.o build/run.cpp.o
+OBJECT_FILES := build/classes.cpp.o build/config.cpp.o build/flags.cpp.o build/files.cpp.o build/help.cpp.o build/init.cpp.o build/main.cpp.o build/run.cpp.o
 
 define COMPILE
 	${CXX} -c $(1) ${CXX_STANDARD} ${INCLUDE_FLAGS} ${DEBUG_FLAGS} ${OPTIMIZATION_FLAGS} -o build/$(notdir $(1)).o
@@ -34,14 +34,17 @@ deps/jsoncpp:
 	cmake -S deps/jsoncpp -B deps/jsoncpp/build -DJSONCPP_WITH_TESTS=OFF -DBUILD_SHARED_LIBS=OFF
 	$(MAKE) -C deps/jsoncpp/build
 
+build/classes.cpp.o: include/classes.hpp src/classes.cpp
+	$(call COMPILE,src/classes.cpp)
+
 build/config.cpp.o: include/config.hpp src/config.cpp
 	$(call COMPILE,src/config.cpp)
 
+build/flags.cpp.o: include/flags.hpp src/flags.cpp
+	$(call COMPILE,src/flags.cpp)
+
 build/files.cpp.o: include/files.hpp src/files.cpp
 	$(call COMPILE,src/files.cpp)
-
-build/classes.cpp.o: include/classes.hpp src/classes.cpp
-	$(call COMPILE,src/classes.cpp)
 
 build/help.cpp.o: include/help.hpp src/help.cpp
 	$(call COMPILE,src/help.cpp)

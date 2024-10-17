@@ -1,12 +1,28 @@
 #include <classes.hpp>
 
+#include <ftxui/component/component_options.hpp>
+
 CheckboxFlag::CheckboxFlag(const std::string& name, const std::vector<std::string>& items) {
   this->name = name;
   this->items = items;
   
   selections.reserve(items.size());
   for(unsigned int i = 0; i < items.size(); i ++)
-    selections.push_back(false);
+    selections.push_back(new bool(false));
+}
+
+CheckboxFlag::~CheckboxFlag() {
+  for(unsigned int i = 0; i < selections.size(); i ++)
+    delete selections[i];
+}
+
+void CheckboxFlag::add_to_tab(ftxui::Component tab) {
+  ftxui::Component container = ftxui::Container::Vertical({});
+  for(unsigned int i = 0; i < items.size(); i ++) {
+    container->Add(ftxui::Checkbox(&items[i], selections[i]));
+  }
+
+  tab->Add(container);
 }
 
 bool CheckboxFlag::check_syntax(Json::Value& json_root) {
@@ -23,7 +39,7 @@ bool CheckboxFlag::check_syntax(Json::Value& json_root) {
 void CheckboxFlag::into_json(Json::Value& json_root) {
   Json::Value array;
   for(unsigned int i = 0; i < selections.size(); i ++)
-    array[i] = (bool) selections[i];
+    array[i] = *selections[i];
 
   json_root[name] = array;
 }
