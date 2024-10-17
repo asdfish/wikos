@@ -18,7 +18,7 @@ class Flag {
     virtual void add_to_tab(ftxui::Component tab) = 0;
     virtual bool check_json(Json::Value&) = 0;
     virtual void set_default() = 0;
-    /*virtual void set_from_json(Json::Value&) = 0;*/
+    virtual void set_from_json(Json::Value&) = 0;
 
     virtual ~Flag() {}
 };
@@ -34,6 +34,7 @@ class CheckboxFlag : public Flag {
     void add_to_tab(ftxui::Component tab) override;
     bool check_json(Json::Value&) override;
     void set_default() override;
+    void set_from_json(Json::Value&) override;
 };
 
 class RadioboxFlag : public Flag {
@@ -47,6 +48,7 @@ class RadioboxFlag : public Flag {
     void add_to_tab(ftxui::Component tab) override;
     bool check_json(Json::Value&) override;
     void set_default() override;
+    void set_from_json(Json::Value&) override;
 };
 
 #endif

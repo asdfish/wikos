@@ -6,6 +6,10 @@ CheckboxFlag::CheckboxFlag(const std::string& header, const std::string& name, c
   this->header = header;
   this->name = name;
   this->items = items;
+
+  selections.reserve(items.size());
+  for(unsigned int i = 0; i < items.size(); i ++)
+    selections.push_back(new bool);
 }
 CheckboxFlag::~CheckboxFlag() {
   for(unsigned int i = 0; i < selections.size(); i ++)
@@ -40,10 +44,18 @@ bool CheckboxFlag::check_json(Json::Value& root) {
 }
 
 void CheckboxFlag::set_default() {
-  selections.clear();
-  selections.reserve(items.size());
   for(unsigned int i = 0; i < items.size(); i ++)
-    selections.push_back(new bool(false));
+    *selections[i] = false;
+}
+
+void CheckboxFlag::set_from_json(Json::Value& root) {
+  if(!check_json(root)) {
+    set_default();
+    return;
+  }
+
+  for(unsigned int i = 0; i < items.size(); i ++)
+    *selections[i] = root[name][i].asBool();
 }
 
 RadioboxFlag::RadioboxFlag(const std::string& header, const std::string& name, const std::vector<std::string>& items) {
@@ -68,12 +80,21 @@ bool RadioboxFlag::check_json(Json::Value& root) {
   if(!root[name].isConvertibleTo(Json::ValueType::uintValue))
     return false;
 
-  if(root[name] >= items.size())
+  if(root[name].asUInt() >= items.size())
     return false;
 
   return true;
 }
 
 void RadioboxFlag::set_default() {
-  this->selection = 0;
+  selection = 0;
+}
+
+void RadioboxFlag::set_from_json(Json::Value& root) {
+  if(!check_json(root)) {
+    set_default();
+    return;
+  }
+
+  selection = root[name].asInt();
 }
