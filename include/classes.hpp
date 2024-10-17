@@ -1,6 +1,7 @@
 #ifndef CLASSES_HPP
 #define CLASSES_HPP
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -31,12 +32,13 @@ class CheckboxFlag : public Flag {
     void into_json(Json::Value&) override;
 };
 
-class DropdownFlag : public Flag {
+class RadioboxFlag : public Flag {
   public:
-    unsigned int selection = 0;
+    int selection = 0;
 
-    DropdownFlag(const std::string& name, const std::vector<std::string>& items);
+    RadioboxFlag(const std::string& name, const std::vector<std::string>& items);
 
+    void add_to_tab(ftxui::Component tab) override;
     bool check_syntax(Json::Value&) override;
     void into_json(Json::Value&) override;
 };

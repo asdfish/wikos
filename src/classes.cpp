@@ -10,17 +10,15 @@ CheckboxFlag::CheckboxFlag(const std::string& name, const std::vector<std::strin
   for(unsigned int i = 0; i < items.size(); i ++)
     selections.push_back(new bool(false));
 }
-
 CheckboxFlag::~CheckboxFlag() {
   for(unsigned int i = 0; i < selections.size(); i ++)
-    delete selections[i];
+    delete selections.at(i);
 }
 
 void CheckboxFlag::add_to_tab(ftxui::Component tab) {
   ftxui::Component container = ftxui::Container::Vertical({});
-  for(unsigned int i = 0; i < items.size(); i ++) {
+  for(unsigned int i = 0; i < items.size(); i ++)
     container->Add(ftxui::Checkbox(&items[i], selections[i]));
-  }
 
   tab->Add(container);
 }
@@ -44,12 +42,19 @@ void CheckboxFlag::into_json(Json::Value& json_root) {
   json_root[name] = array;
 }
 
-DropdownFlag::DropdownFlag(const std::string& name, const std::vector<std::string>& items) {
+RadioboxFlag::RadioboxFlag(const std::string& name, const std::vector<std::string>& items) {
   this->name = name;
   this->items = items;
 }
 
-bool DropdownFlag::check_syntax(Json::Value& json_root) {
+void RadioboxFlag::add_to_tab(ftxui::Component tab) {
+  ftxui::Component container = ftxui::Container::Vertical({});
+  container->Add(ftxui::Radiobox(&items, &selection));
+
+  tab->Add(container);
+}
+
+bool RadioboxFlag::check_syntax(Json::Value& json_root) {
   if(!json_root[name].isConvertibleTo(Json::ValueType::uintValue))
     return false;
 
@@ -59,6 +64,6 @@ bool DropdownFlag::check_syntax(Json::Value& json_root) {
   return true;
 }
 
-void DropdownFlag::into_json(Json::Value& json_root) {
+void RadioboxFlag::into_json(Json::Value& json_root) {
   json_root[name] = selection;
 }

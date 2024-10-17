@@ -1,6 +1,9 @@
+#include <flags.hpp>
 #include <files.hpp>
 #include <init.hpp>
 #include <utils.hpp>
+
+#include <json/json.h>
 
 #include <filesystem>
 #include <fstream>
@@ -57,6 +60,22 @@ int init(void) {
     std::cout << "Failed to open ./.wikos.jsonc for writing\n";
     return -1;
   }
+
+  flags_init();
+
+  Json::Value root;
+  for(unsigned int i = 0; i < flags.size(); i ++)
+    flags[i]->into_json(root);
+
+  Json::Value files;
+  for(unsigned int i = 0; i < source_files.size(); i ++)
+    files[i] = source_files[i];
+  root["files"] = files;
+
+
+  Json::FastWriter writer;
+  wikos_jsonc << writer.write(root);
+
   wikos_jsonc.close();
   return 0;
 }
