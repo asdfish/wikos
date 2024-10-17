@@ -2,17 +2,22 @@
 
 #include <ftxui/component/component_options.hpp>
 
-CheckboxFlag::CheckboxFlag(const std::string& name, const std::vector<std::string>& items) {
+CheckboxFlag::CheckboxFlag(const std::string& header, const std::string& name, const std::vector<std::string>& items) {
+  this->header = header;
   this->name = name;
   this->items = items;
-  
-  selections.reserve(items.size());
-  for(unsigned int i = 0; i < items.size(); i ++)
-    selections.push_back(new bool(false));
 }
 CheckboxFlag::~CheckboxFlag() {
   for(unsigned int i = 0; i < selections.size(); i ++)
     delete selections.at(i);
+}
+
+void CheckboxFlag::add_to_json(Json::Value& root) {
+  Json::Value array;
+  for(unsigned int i = 0; i < selections.size(); i ++)
+    array[i] = *selections[i];
+
+  root[name] = array;
 }
 
 void CheckboxFlag::add_to_tab(ftxui::Component tab) {
@@ -23,28 +28,33 @@ void CheckboxFlag::add_to_tab(ftxui::Component tab) {
   tab->Add(container);
 }
 
-bool CheckboxFlag::check_syntax(Json::Value& json_root) {
-  if(!json_root[name].isArray())
+bool CheckboxFlag::check_json(Json::Value& root) {
+  if(!root[name].isArray())
     return false;
 
-  for(unsigned int i = 0; i < json_root[name].size(); i ++)
-    if(!json_root[name][i].isBool())
+  for(unsigned int i = 0; i < root[name].size(); i ++)
+    if(!root[name][i].isBool())
       return false;
 
   return true;
 }
 
-void CheckboxFlag::into_json(Json::Value& json_root) {
-  Json::Value array;
-  for(unsigned int i = 0; i < selections.size(); i ++)
-    array[i] = *selections[i];
-
-  json_root[name] = array;
+void CheckboxFlag::set_default() {
+  selections.clear();
+  selections.reserve(items.size());
+  for(unsigned int i = 0; i < items.size(); i ++)
+    selections.push_back(new bool(false));
 }
 
-RadioboxFlag::RadioboxFlag(const std::string& name, const std::vector<std::string>& items) {
+RadioboxFlag::RadioboxFlag(const std::string& header, const std::string& name, const std::vector<std::string>& items) {
+  this->header = header;
   this->name = name;
   this->items = items;
+}
+RadioboxFlag::~RadioboxFlag() {};
+
+void RadioboxFlag::add_to_json(Json::Value& root) {
+  root[name] = selection;
 }
 
 void RadioboxFlag::add_to_tab(ftxui::Component tab) {
@@ -54,16 +64,16 @@ void RadioboxFlag::add_to_tab(ftxui::Component tab) {
   tab->Add(container);
 }
 
-bool RadioboxFlag::check_syntax(Json::Value& json_root) {
-  if(!json_root[name].isConvertibleTo(Json::ValueType::uintValue))
+bool RadioboxFlag::check_json(Json::Value& root) {
+  if(!root[name].isConvertibleTo(Json::ValueType::uintValue))
     return false;
 
-  if(json_root[name] >= items.size())
+  if(root[name] >= items.size())
     return false;
 
   return true;
 }
 
-void RadioboxFlag::into_json(Json::Value& json_root) {
-  json_root[name] = selection;
+void RadioboxFlag::set_default() {
+  this->selection = 0;
 }

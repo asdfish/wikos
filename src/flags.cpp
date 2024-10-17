@@ -87,12 +87,18 @@ const std::vector<std::string> others = {
 std::vector<std::unique_ptr<Flag>> flags;
 
 void flags_init(void) {
-  flags.push_back(std::make_unique<CheckboxFlag>("checks", checks));
-  flags.push_back(std::make_unique<RadioboxFlag>("mumerical_abstract_domains", mumerical_abstract_domains));
-  flags.push_back(std::make_unique<RadioboxFlag>("optimization_levels", optimization_levels));
-  flags.push_back(std::make_unique<RadioboxFlag>("procedural_analysis", procedural_analysis));
-  flags.push_back(std::make_unique<RadioboxFlag>("widening_strategies", widening_strategies));
-  flags.push_back(std::make_unique<RadioboxFlag>("narrowing_strategies", narrowing_strategies));
-  flags.push_back(std::make_unique<RadioboxFlag>("partitioning_type", partitioning_type));
-  flags.push_back(std::make_unique<CheckboxFlag>("others", others));
+  flags.push_back(std::make_unique<CheckboxFlag>("-a=", "checks", checks));
+  flags.push_back(std::make_unique<RadioboxFlag>("-d=", "mumerical_abstract_domains", mumerical_abstract_domains));
+  flags.push_back(std::make_unique<RadioboxFlag>("--opt=", "optimization_levels", optimization_levels));
+  flags.push_back(std::make_unique<RadioboxFlag>("--proc=", "procedural_analysis", procedural_analysis));
+  flags.push_back(std::make_unique<RadioboxFlag>("--widening-strategy=", "widening_strategies", widening_strategies));
+  flags.push_back(std::make_unique<RadioboxFlag>("--narrowing-strategy", "narrowing_strategies", narrowing_strategies));
+  flags.push_back(std::make_unique<RadioboxFlag>("--partitioning=", "partitioning_type", partitioning_type));
+  flags.push_back(std::make_unique<CheckboxFlag>("--", "others", others));
+}
+
+void flags_init_default(void) {
+  flags_init();
+  for(unsigned int i = 0; i < flags.size(); i ++)
+    flags[i]->set_default();
 }

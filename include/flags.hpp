@@ -19,5 +19,6 @@ extern const std::vector<std::string> others;
 extern std::vector<std::unique_ptr<Flag>> flags;
 
 extern void flags_init(void);
+extern void flags_init_default(void);
 
 #endif

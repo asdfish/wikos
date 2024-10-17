@@ -36,36 +36,36 @@ int init(void) {
     }
   }
 
-  if(std::filesystem::exists("./.wikos.jsonc")) {
-    std::cout << "./wikos.jsonc already exists. Overide? (y): ";
+  if(std::filesystem::exists(".wikos.jsonc")) {
+    std::cout << "wikos.jsonc already exists. Overide? (y): ";
     std::string confirmation;
     std::cin >> confirmation;
 
     std::error_code error;
     error.clear();
 
-    if(std::filesystem::is_regular_file("./.wikos.jsonc"))
-      std::filesystem::remove("./.wikos.jsonc", error);
+    if(std::filesystem::is_regular_file(".wikos.jsonc"))
+      std::filesystem::remove(".wikos.jsonc", error);
     else
-      std::filesystem::remove_all("./.wikos.jsonc", error);
+      std::filesystem::remove_all(".wikos.jsonc", error);
 
     if(error.value() != 0) {
-      std::cout << "Failed to remove ./.wikos.jsonc\n";
+      std::cout << "Failed to remove .wikos.jsonc\n";
       return -1;
     }
   }
 
-  std::ofstream wikos_jsonc("./.wikos.jsonc");
+  std::ofstream wikos_jsonc(".wikos.jsonc");
   if(!wikos_jsonc.good()) {
-    std::cout << "Failed to open ./.wikos.jsonc for writing\n";
+    std::cout << "Failed to open .wikos.jsonc for writing\n";
     return -1;
   }
 
-  flags_init();
+  flags_init_default();
 
   Json::Value root;
   for(unsigned int i = 0; i < flags.size(); i ++)
-    flags[i]->into_json(root);
+    flags[i]->add_to_json(root);
 
   Json::Value files;
   for(unsigned int i = 0; i < source_files.size(); i ++)
