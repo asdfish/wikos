@@ -1,3 +1,5 @@
+#include <flags/checkbox_flag.hpp>
+#include <flags/radiobox_flag.hpp>
 #include <utils/flag_definitions.hpp>
 
 const std::vector<std::string> checks = {
@@ -84,7 +86,7 @@ const std::vector<std::string> others = {
   "no-libc",
 };
 
-std::vector<std::unique_ptr<Flag>> flags;
+std::vector<std::unique_ptr<FlagBase>> flags;
 
 void flags_define(void) {
   flags.push_back(std::make_unique<CheckboxFlag>("-a=", "checks", checks));
