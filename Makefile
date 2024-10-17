@@ -55,18 +55,18 @@ build/commands/init.cpp.o: include/commands/init.hpp include/utils/flag_definiti
 build/commands/run.cpp.o: include/commands/run.hpp include/utils/flag_definitions.hpp src/commands/run.cpp
 	$(call COMPILE,src/commands/run.cpp,build/commands/run.cpp.o)
 
-build/flags/checkbox_array_flag.cpp.o: include/flags/flag_base.hpp include/flags/checkbox_array_flag.hpp src/flags/checkbox_array_flag.cpp
+build/flags/checkbox_array_flag.cpp.o: include/flags/checkbox_array_flag.hpp src/flags/checkbox_array_flag.cpp
 	$(call COMPILE,src/flags/checkbox_array_flag.cpp,build/flags/checkbox_array_flag.cpp.o)
-build/flags/checkbox_base.cpp.o: include/flags/flag_base.hpp include/flags/checkbox_base.hpp src/flags/checkbox_base.cpp
+build/flags/checkbox_base.cpp.o: include/flags/checkbox_base.hpp src/flags/checkbox_base.cpp
 	$(call COMPILE,src/flags/checkbox_base.cpp,build/flags/checkbox_base.cpp.o)
-build/flags/checkbox_separated_flag.cpp.o: include/flags/flag_base.hpp include/flags/checkbox_separated_flag.hpp src/flags/checkbox_separated_flag.cpp
+build/flags/checkbox_separated_flag.cpp.o: include/flags/checkbox_separated_flag.hpp src/flags/checkbox_separated_flag.cpp
 	$(call COMPILE,src/flags/checkbox_separated_flag.cpp,build/flags/checkbox_separated_flag.cpp.o)
-build/flags/radiobox_flag.cpp.o: include/flags/flag_base.hpp include/flags/radiobox_flag.hpp src/flags/radiobox_flag.cpp
+build/flags/radiobox_flag.cpp.o: include/flags/radiobox_flag.hpp src/flags/radiobox_flag.cpp
 	$(call COMPILE,src/flags/radiobox_flag.cpp,build/flags/radiobox_flag.cpp.o)
 
 build/utils/files.cpp.o: include/utils/files.hpp src/utils/files.cpp
 	$(call COMPILE,src/utils/files.cpp,build/utils/files.cpp.o)
-build/utils/flag_definitions.cpp.o: include/flags/checkbox_base.hpp include/flags/radiobox_flag.hpp include/utils/flag_definitions.hpp src/utils/flag_definitions.cpp
+build/utils/flag_definitions.cpp.o: include/flags/checkbox_array_flag.hpp include/flags/checkbox_separated_flag.hpp include/flags/radiobox_flag.hpp src/utils/flag_definitions.cpp
 	$(call COMPILE,src/utils/flag_definitions.cpp,build/utils/flag_definitions.cpp.o)
 
 build/main.cpp.o: include/commands/config.hpp include/commands/help.hpp include/commands/init.hpp include/commands/run.hpp src/main.cpp

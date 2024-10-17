@@ -7,11 +7,10 @@
 
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
 #include <system_error>
-
-#include <iostream>
 
 int init(void) {
   std::vector<std::string> source_files;
