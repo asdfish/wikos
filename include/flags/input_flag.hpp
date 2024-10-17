@@ -14,8 +14,6 @@ class InputFlag : public FlagBase {
     bool check_json(Json::Value&) override;
     void set_default() override;
     void set_from_json(Json::Value&) override;
-  private:
-    void add_input(ftxui::Component tab);
 };
 
 #endif

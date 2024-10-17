@@ -19,6 +19,10 @@ void RadioboxFlag::add_to_tab(ftxui::Component tab) {
   tab->Add(container);
 }
 
+std::string RadioboxFlag::as_string() {
+  return header + items[selection];
+}
+
 bool RadioboxFlag::check_json(Json::Value& root) {
   if(!root[name].isConvertibleTo(Json::ValueType::uintValue) || root[name].asUInt() >= items.size())
     return false;

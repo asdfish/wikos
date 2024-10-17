@@ -16,6 +16,7 @@ class FlagBase {
 
     virtual void add_to_json(Json::Value&) = 0;
     virtual void add_to_tab(ftxui::Component tab) = 0;
+    virtual std::string as_string() = 0;
     virtual bool check_json(Json::Value&) = 0;
     virtual void set_default() = 0;
     virtual void set_from_json(Json::Value&) = 0;

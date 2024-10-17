@@ -89,14 +89,14 @@ const std::vector<std::string> others = {
 std::vector<std::unique_ptr<FlagBase>> flags;
 
 void flags_define(void) {
-  flags.push_back(std::make_unique<CheckboxFlag>("-a=", "checks", checks));
+  /*flags.push_back(std::make_unique<CheckboxFlag>("-a=", "checks", checks));*/
   flags.push_back(std::make_unique<RadioboxFlag>("-d=", "mumerical_abstract_domains", mumerical_abstract_domains));
   flags.push_back(std::make_unique<RadioboxFlag>("--opt=", "optimization_levels", optimization_levels));
   flags.push_back(std::make_unique<RadioboxFlag>("--proc=", "procedural_analysis", procedural_analysis));
   flags.push_back(std::make_unique<RadioboxFlag>("--widening-strategy=", "widening_strategies", widening_strategies));
   flags.push_back(std::make_unique<RadioboxFlag>("--narrowing-strategy", "narrowing_strategies", narrowing_strategies));
   flags.push_back(std::make_unique<RadioboxFlag>("--partitioning=", "partitioning_type", partitioning_type));
-  flags.push_back(std::make_unique<CheckboxFlag>("--", "others", others));
+  /*flags.push_back(std::make_unique<CheckboxFlag>("--", "others", others));*/
 }
 
 void flags_define_default(void) {

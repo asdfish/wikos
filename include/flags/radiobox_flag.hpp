@@ -11,6 +11,7 @@ class RadioboxFlag : public FlagBase {
 
     void add_to_json(Json::Value&) override;
     void add_to_tab(ftxui::Component tab) override;
+    std::string as_string() override;
     bool check_json(Json::Value&) override;
     void set_default() override;
     void set_from_json(Json::Value&) override;
