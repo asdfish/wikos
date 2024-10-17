@@ -1,18 +1,17 @@
-#include <flags/checkbox_array_flag.hpp>
+#include <flags/checkbox_separated_flag.hpp>
 
-std::string CheckboxArrayFlag::as_string() {
+std::string CheckboxSeparatedFlag::as_string() {
   std::vector<std::string> selected;
   for(unsigned int i = 0; i < items.size(); i ++)
     if(*selections[i])
       selected.push_back(items[i]);
 
-  std::string output = header + "\'";
+  std::string output;
   for(unsigned int i = 0; i < selected.size(); i ++) {
-    output += selected[i];
+    output += header + selected[i];
     if(i != selected.size() - 1)
-      output += ",";
+      output += " ";
   }
-  output += "\'";
 
   return output;
 }

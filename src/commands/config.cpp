@@ -75,7 +75,7 @@ int config(void) {
 
   ftxui::Component container = ftxui::Container::Horizontal({
     menu,
-    tabs,
+    tabs | ftxui::flex,
     buttons,
   });
 
