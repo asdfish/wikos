@@ -13,8 +13,6 @@
 #include <system_error>
 
 int init(void) {
-  std::vector<std::string> source_files = get_source_files();
-
   if(std::filesystem::exists(".wikos.jsonc")) {
     std::cout << "wikos.jsonc already exists. Overide? (y): ";
     std::string confirmation;
@@ -45,12 +43,6 @@ int init(void) {
   Json::Value root;
   for(unsigned int i = 0; i < flags.size(); i ++)
     flags[i]->add_to_json(root);
-
-  Json::Value files;
-  for(unsigned int i = 0; i < source_files.size(); i ++)
-    files[i] = source_files[i];
-  root["files"] = files;
-
 
   Json::FastWriter writer;
   wikos_jsonc << writer.write(root);

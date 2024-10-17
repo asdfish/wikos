@@ -8,7 +8,7 @@ DEBUG_FLAGS := -Wall -Wextra -Wpedantic -Wno-missing-field-initializers
 OPTIMIZATION_FLAGS := -O2 -march=native -pipe
 
 OBJECT_FILES := build/commands/config.cpp.o build/commands/help.cpp.o build/commands/init.cpp.o build/commands/run.cpp.o $\
-								build/flags/checkbox_base.cpp.o build/flags/checkbox_array_flag.cpp.o build/flags/checkbox_separated_flag.cpp.o build/flags/input_flag.cpp.o build/flags/radiobox_flag.cpp.o $\
+								build/flags/checkbox_base.cpp.o build/flags/checkbox_array_flag.cpp.o build/flags/checkbox_separated_flag.cpp.o build/flags/input_flag.cpp.o build/flags/radiobox_flag.cpp.o build/flags/source_files_flag.cpp.o $\
 								build/utils/files.cpp.o build/utils/flag_definitions.cpp.o $\
 								build/main.cpp.o
 
@@ -65,6 +65,8 @@ build/flags/input_flag.cpp.o: include/flags/input_flag.hpp src/flags/input_flag.
 	$(call COMPILE,src/flags/input_flag.cpp,build/flags/input_flag.cpp.o)
 build/flags/radiobox_flag.cpp.o: include/flags/radiobox_flag.hpp src/flags/radiobox_flag.cpp
 	$(call COMPILE,src/flags/radiobox_flag.cpp,build/flags/radiobox_flag.cpp.o)
+build/flags/source_files_flag.cpp.o: include/flags/source_files_flag.hpp include/utils/files.hpp src/flags/source_files_flag.cpp
+	$(call COMPILE,src/flags/source_files_flag.cpp,build/flags/source_files_flag.cpp.o)
 
 build/utils/files.cpp.o: include/utils/files.hpp include/utils/vectors.hpp src/utils/files.cpp
 	$(call COMPILE,src/utils/files.cpp,build/utils/files.cpp.o)

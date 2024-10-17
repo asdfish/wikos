@@ -7,6 +7,7 @@ CheckboxBase::CheckboxBase(const std::string& header, const std::string& name, c
   this->name = name;
   this->items = items;
 
+  selections.clear();
   selections.reserve(items.size());
   for(unsigned int i = 0; i < items.size(); i ++)
     selections.push_back(new bool);
