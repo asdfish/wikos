@@ -8,7 +8,7 @@ DEBUG_FLAGS := -Wall -Wextra -Wpedantic -Wno-missing-field-initializers
 OPTIMIZATION_FLAGS := -O2 -march=native -pipe
 
 OBJECT_FILES := build/commands/config.cpp.o build/commands/help.cpp.o build/commands/init.cpp.o build/commands/run.cpp.o $\
-								build/flags/checkbox_flag.cpp.o build/flags/input_flag.cpp.o build/flags/radiobox_flag.cpp.o $\
+								build/flags/checkbox_base.cpp.o build/flags/checkbox_array_flag.cpp.o build/flags/input_flag.cpp.o build/flags/radiobox_flag.cpp.o $\
 								build/utils/files.cpp.o build/utils/flag_definitions.cpp.o $\
 								build/main.cpp.o
 
@@ -52,12 +52,13 @@ build/commands/help.cpp.o: src/commands/help.cpp
 	$(call COMPILE,src/commands/help.cpp,build/commands/help.cpp.o)
 build/commands/init.cpp.o: include/commands/init.hpp include/utils/flag_definitions.hpp include/utils/files.hpp include/utils/vectors.hpp src/commands/init.cpp
 	$(call COMPILE,src/commands/init.cpp,build/commands/init.cpp.o)
-build/commands/run.cpp.o: src/commands/run.cpp
+build/commands/run.cpp.o: include/commands/run.hpp include/utils/flag_definitions.hpp src/commands/run.cpp
 	$(call COMPILE,src/commands/run.cpp,build/commands/run.cpp.o)
 
-build/flags/checkbox_flag.cpp.o: include/flags/flag_base.hpp include/flags/checkbox_flag.hpp src/flags/checkbox_flag.cpp
-	$(call COMPILE,src/flags/checkbox_flag.cpp,build/flags/checkbox_flag.cpp.o)
-
+build/flags/checkbox_base.cpp.o: include/flags/flag_base.hpp include/flags/checkbox_base.hpp src/flags/checkbox_base.cpp
+	$(call COMPILE,src/flags/checkbox_base.cpp,build/flags/checkbox_base.cpp.o)
+build/flags/checkbox_array_flag.cpp.o: include/flags/flag_base.hpp include/flags/checkbox_array_flag.hpp src/flags/checkbox_array_flag.cpp
+	$(call COMPILE,src/flags/checkbox_array_flag.cpp,build/flags/checkbox_array_flag.cpp.o)
 build/flags/input_flag.cpp.o: include/flags/flag_base.hpp include/flags/input_flag.hpp src/flags/input_flag.cpp
 	$(call COMPILE,src/flags/input_flag.cpp,build/flags/input_flag.cpp.o)
 build/flags/radiobox_flag.cpp.o: include/flags/flag_base.hpp include/flags/radiobox_flag.hpp src/flags/radiobox_flag.cpp
@@ -65,7 +66,7 @@ build/flags/radiobox_flag.cpp.o: include/flags/flag_base.hpp include/flags/radio
 
 build/utils/files.cpp.o: include/utils/files.hpp src/utils/files.cpp
 	$(call COMPILE,src/utils/files.cpp,build/utils/files.cpp.o)
-build/utils/flag_definitions.cpp.o: include/flags/checkbox_flag.hpp include/flags/radiobox_flag.hpp include/utils/flag_definitions.hpp src/utils/flag_definitions.cpp
+build/utils/flag_definitions.cpp.o: include/flags/checkbox_base.hpp include/flags/radiobox_flag.hpp include/utils/flag_definitions.hpp src/utils/flag_definitions.cpp
 	$(call COMPILE,src/utils/flag_definitions.cpp,build/utils/flag_definitions.cpp.o)
 
 build/main.cpp.o: include/commands/config.hpp include/commands/help.hpp include/commands/init.hpp include/commands/run.hpp src/main.cpp
