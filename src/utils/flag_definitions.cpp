@@ -1,5 +1,6 @@
 #include <flags/checkbox_array_flag.hpp>
 #include <flags/checkbox_separated_flag.hpp>
+#include <flags/input_flag.hpp>
 #include <flags/radiobox_flag.hpp>
 #include <utils/flag_definitions.hpp>
 
@@ -98,6 +99,7 @@ void flags_define(void) {
   flags.push_back(std::make_unique<RadioboxFlag>("--narrowing-strategy=", "narrowing_strategies", narrowing_strategies));
   flags.push_back(std::make_unique<RadioboxFlag>("--partitioning=", "partitioning_type", partitioning_type));
   flags.push_back(std::make_unique<CheckboxSeparatedFlag>("--", "others", others));
+  flags.push_back(std::make_unique<InputFlag>("", "compiler_flags"));
 }
 
 void flags_define_default(void) {
