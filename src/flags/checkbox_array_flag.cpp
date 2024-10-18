@@ -6,6 +6,9 @@ std::string CheckboxArrayFlag::as_string(void) {
     if(*selections[i])
       selected.push_back(items[i]);
 
+  if(selected.size() == 0)
+    return "";
+
   std::string output = header + "\'";
   for(unsigned int i = 0; i < selected.size(); i ++) {
     output += selected[i];

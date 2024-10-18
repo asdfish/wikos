@@ -72,7 +72,7 @@ const std::vector<std::string> narrowing_strategies = {
 };
 
 const std::vector<std::string> partitioning_type = {
-  "none",
+  "no",
   "return",
   "manual",
 };
