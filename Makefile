@@ -14,36 +14,21 @@ OBJECT_FILES := build/commands/config.cpp.o build/commands/help.cpp.o build/comm
 
 INSTALL_DIRECTORY := /usr/local/bin
 
+FTXUI_LIBS := deps/ftxui/build/libftxui-component.a deps/ftxui/build/libftxui-dom.a deps/ftxui/build/libftxui-screen.a
+
 define COMPILE
 	${CXX} -c $(1) ${CXX_STANDARD} ${INCLUDE_FLAGS} ${DEBUG_FLAGS} ${OPTIMIZATION_FLAGS} -o $(2)
 
 endef
 
-all: build build/commands build/flags build/utils deps deps/ftxui deps/jsoncpp wikos
+all: ${FTXUI_LIBS} deps/jsoncpp/build/lib/libjsoncpp.a wikos
 
-build:
-	mkdir build
-
-build/commands:
-	mkdir build/commands
-
-build/flags:
-	mkdir build/flags
-
-build/utils:
-	mkdir build/utils
-
-deps:
-	mkdir deps
-
-deps/ftxui:
-	git -C deps clone https://github.com/ArthurSonzogni/ftxui --depth=1 --branch=v5.0.0
+${FTXUI_LIBS}:
 	mkdir deps/ftxui/build
 	cmake -S deps/ftxui -B deps/ftxui/build
 	$(MAKE) -C deps/ftxui/build
 
-deps/jsoncpp:
-	git -C deps clone https://github.com/open-source-parsers/jsoncpp --depth=1 --branch=1.9.6
+deps/jsoncpp/build/lib/libjsoncpp.a:
 	mkdir deps/jsoncpp/build
 	cmake -S deps/jsoncpp -B deps/jsoncpp/build -DJSONCPP_WITH_TESTS=OFF -DBUILD_SHARED_LIBS=OFF -DBUILD_OBJECT_LIBS=OFF
 	$(MAKE) -C deps/jsoncpp/build

@@ -1,0 +1,6 @@
+[submodule "deps/ftxui"]
+	path = deps/ftxui
+	url = https://github.com/ArthurSonzogni/ftxui
+[submodule "deps/jsoncpp"]
+	path = deps/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp
